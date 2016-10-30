@@ -5,12 +5,11 @@ import (
 	"encoding/base64"
 	"log"
 	"net/http"
-	"strings"
 )
 
 func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		decodeAddress := strings.TrimPrefix(r.URL.Path, "/")
+		decodeAddress := r.URL.Path[1:]
 		encodeAddress, err := base64.StdEncoding.DecodeString(decodeAddress)
 		if err != nil {
 			log.Fatal(err)
